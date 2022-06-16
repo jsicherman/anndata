@@ -146,10 +146,11 @@ def _fmt_loom_axis_attrs(
         axis_mapping[key] = np.array([input.pop(name) for name in names]).T
 
     for k, v in input.items():
-        if v.ndim > 1 and v.shape[1] > 1:
-            axis_mapping[k] = v
-        else:
-            axis_df[k] = v
+        if v is not None:
+            if v.ndim > 1 and v.shape[1] > 1:
+                axis_mapping[k] = v
+            else:
+                axis_df[k] = v
 
     if idx_name in axis_df:
         axis_df.set_index(idx_name, drop=True, inplace=True)
